@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Headlines</h1>
+
+<div class='headlines-search'>
+  <%= form_tag headlines_path, method: :get do %>
+  <div class='form-group'>
+    <%= text_field_tag :query, params[:query], class: 'form-control typeahead', id: "headline_search" %>
+    <%= submit_tag 'Search' %>  	
+  </div>
+  <% end %>	
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @headlines.each do |headline| %>
+      <tr>
+        <td><%= headline.title %></td>
+        <td><%= link_to 'Show', headline %></td>
+        <td><%= link_to 'Edit', edit_headline_path(headline) %></td>
+        <td><%= link_to 'Destroy', headline, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Headline', new_headline_path %>
